@@ -1,23 +1,20 @@
 import { TabPanel, Table, TableBody, TableCell, TableHead, TableHeaderCell, TableRow } from "@tremor/react";
+import { useEffect, useState } from "react";
+import { Student, fetchStudents } from "../api/fetch";
 
-const data = [
-  {
-    id: 1,
-    name: "Viola Amherd",
-    cardIdType: "Federal Councillor",
-    cardIdNumber: "The Federal Department of Defence, Civil Protection and Sport (DDPS)",
-    session: "active",
-  },
-  {
-    id: 1,
-    name: "Viola Amherd",
-    cardIdType: "Federal Councillor",
-    cardIdNumber: "The Federal Department of Defence, Civil Protection and Sport (DDPS)",
-    session: "active",
-  },
-];
 
 export function StudentTab () {
+  const [students, setStudents] = useState<Student[]>([])
+
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      const studentData = await fetchStudents() ?? [];
+      setStudents(studentData);
+    };
+
+    fetchStudentData(); 
+  }, [])
+
   return (
     <TabPanel >
       <Table>
@@ -30,12 +27,12 @@ export function StudentTab () {
           </TableRow>
         </TableHead>
         <TableBody>
-          {data.map((item) => (
-            <TableRow key={item.id}>
-              <TableCell>{item.name}</TableCell>
-              <TableCell>{item.cardIdType}</TableCell>
-              <TableCell>{item.cardIdNumber}</TableCell>
-              <TableCell>{item.session}</TableCell>
+          {students.map((student) => (
+            <TableRow key={student.id}>
+              <TableCell>{student.name}</TableCell>
+              <TableCell>{student.cardIdType}</TableCell>
+              <TableCell>{student.cardIdNumber}</TableCell>
+              <TableCell>{student.session}</TableCell>
             </TableRow>
           ))}
         </TableBody>
