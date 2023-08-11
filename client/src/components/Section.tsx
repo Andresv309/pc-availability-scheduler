@@ -15,16 +15,16 @@ export function Section () {
   return (
       <TabGroup className="mt-1">
         <TabList className="mt-2">
-          <Tab icon={ComputerDesktopIcon}>Computadores</Tab>
+          {/* <Tab icon={ComputerDesktopIcon}>Computadores</Tab> */}
           <Tab icon={UserGroupIcon}>Estudiantes</Tab>
-          <Tab icon={ArchiveBoxIcon}>Inventario</Tab>
-          <Tab icon={UserPlusIcon}>Assignación de Computador</Tab>
+          {/* <Tab icon={ArchiveBoxIcon}>Inventario</Tab> */}
+          {/* <Tab icon={UserPlusIcon}>Assignación de Computador</Tab> */}
         </TabList>
         <TabPanels className="px-4 py-4">
-          <ComputerTab />
+          {/* <ComputerTab /> */}
           <StudentTab />
-          <StockTab />
-          <AssignmentTab />
+          {/* <StockTab /> */}
+          {/* <AssignmentTab /> */}
         </TabPanels>
       </TabGroup>
   )
