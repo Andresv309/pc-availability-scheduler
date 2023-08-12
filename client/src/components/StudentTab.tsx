@@ -61,16 +61,41 @@ export function StudentTab () {
     console.log(p)
   }
 
+  // const cardTypeCellValue = (p) => {
+  //   return
+  // }
+
+
 
   // Applied configuration for each column
   const columnDefs: ColDef[] = useMemo(() => [
     // { field: 'index', headerName: '#', pinned: 'left', lockPinned: true, lockPosition: true },
-    { headerName: '#', maxWidth: 70, valueGetter: indexGetter, filter: null},
+    { headerName: '#', maxWidth: 70, pinned: 'left', lockPinned: true, lockPosition: true, valueGetter: indexGetter, filter: null},
     { field: 'id', hide: true },
-    { field: 'name', headerName: 'Nombre' },
-    { field: 'cardIdType', headerName: 'Tipo de Documento' },
-    { field: 'cardIdNumber', headerName: 'No. de Documento' },
-    { field: 'session', headerName: 'Jornada', valueGetter: sessionCellValue }
+    { field: 'name', headerName: 'Nombre'},
+    { field: 'cardIdType',
+      headerName: 'Tipo de Documento',
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {values: ['CC', 'TI']}
+    },
+    { field: 'cardIdNumber',
+      headerName: 'No. de Documento',
+      cellEditor: 'agNumberCellEditor',
+      cellDataType: 'number',
+      valueGetter: (p) => +p.data.cardIdNumber
+      // cellEditorParams: {
+      //   min: 1,
+      //   max: 9999999999,
+      //   precision: 0,
+      // }
+
+    },
+    { field: 'session',
+      headerName: 'Jornada',
+      valueGetter: sessionCellValue,
+      cellEditor: 'agSelectCellEditor',
+      cellEditorParams: {values: Object.values(SESSION)}
+    }
   ], []);
 
   // Applied configurations for all columns
