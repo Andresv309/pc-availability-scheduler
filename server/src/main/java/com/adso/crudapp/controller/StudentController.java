@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.adso.crudapp.exception.ComputerStockNotFoundException;
 import com.adso.crudapp.exception.StudentNotFoundException;
+import com.adso.crudapp.model.Computer;
+import com.adso.crudapp.model.ComputerStock;
 import com.adso.crudapp.model.Student;
+import com.adso.crudapp.repository.ComputerStockRepository;
 import com.adso.crudapp.repository.StudentRepository;
 
 @RestController
@@ -20,6 +24,8 @@ public class StudentController {
 	
 	@Autowired
 	private StudentRepository studentRepository;
+	@Autowired
+	private ComputerStockRepository computerStockRepository;
 	
 	@PostMapping("/student")
 	Student newStudent(@RequestBody Student newStudent) {
@@ -40,13 +46,29 @@ public class StudentController {
 	@PutMapping("/student/{id}")
 	Student updateStudent(@RequestBody Student student, @PathVariable Long id) {
 		return studentRepository.findById(id)
-				.map(user -> {
-					user.setName(student.getName());
-					user.setCardIdType(student.getCardIdType());
-					user.setCardIdNumber(student.getCardIdNumber());
-					user.setSession(student.getSession());
+				.map(studentDB -> {
+					studentDB.setName(student.getName());
+					studentDB.setCardIdType(student.getCardIdType());
+					studentDB.setCardIdNumber(student.getCardIdNumber());
+					studentDB.setSession(student.getSession());
 					
-					return studentRepository.save(user);
+					// This is where I need help
+//					studentDB.setComputerStock(new ComputerStock());
+					
+	                if (student.getComputerStock() != null && student.getComputerStock().getId() != null) {
+	                	Long idComputerStock =  student.getComputerStock().getId();
+	                	
+	                    ComputerStock computerStock = computerStockRepository.findById(idComputerStock)
+	                            .orElseThrow(() -> new ComputerStockNotFoundException(idComputerStock));
+	                	               	
+	                    studentDB.setComputerStock(computerStock);
+	                } else {
+	                	studentDB.setComputerStock(null);
+	                }
+					
+					
+					
+					return studentRepository.save(studentDB);
 				}).orElseThrow(() -> new StudentNotFoundException(id));
 	}
 	

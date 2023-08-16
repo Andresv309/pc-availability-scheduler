@@ -3,9 +3,11 @@ package com.adso.crudapp.model;
 import com.adso.crudapp.enums.CardIdType;
 import com.adso.crudapp.enums.Session;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -30,8 +32,11 @@ public class Student {
 	@Enumerated(EnumType.STRING)
 	private Session session;
 
-    @OneToOne(mappedBy = "student")
-    private ComputerAssignment computerAssignment;
+//    @OneToOne(mappedBy = "student", cascade = CascadeType.PERSIST)
+//    private ComputerAssignment computerAssignment;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
+    private ComputerStock computerStock;
 
 	public Long getId() {
 		return id;
@@ -65,16 +70,25 @@ public class Student {
 		this.session = session;
 	}
 
-	public ComputerAssignment getComputerAssignment() {
-		return computerAssignment;
-	}
+//	public ComputerAssignment getComputerAssignment() {
+//		return computerAssignment;
+//	}
+//
+//	public void setComputerAssignment(ComputerAssignment computerAssignment) {
+//		this.computerAssignment = computerAssignment;
+//	}
 
-	public void setComputerAssignment(ComputerAssignment computerAssignment) {
-		this.computerAssignment = computerAssignment;
-	}
 
 	public CardIdType getCardIdType() {
 		return cardIdType;
+	}
+
+	public ComputerStock getComputerStock() {
+		return computerStock;
+	}
+
+	public void setComputerStock(ComputerStock computerStock) {
+		this.computerStock = computerStock;
 	}
 
 	public void setCardIdType(CardIdType cardIdType) {
