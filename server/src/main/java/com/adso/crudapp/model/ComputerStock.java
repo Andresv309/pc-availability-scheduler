@@ -2,9 +2,11 @@ package com.adso.crudapp.model;
 
 import com.adso.crudapp.enums.State;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -25,7 +27,7 @@ public class ComputerStock {
     @Enumerated(EnumType.STRING)
     private State state;
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     @JoinColumn(name = "computer_id")
     private Computer computer;
 

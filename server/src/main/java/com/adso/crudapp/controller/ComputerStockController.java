@@ -29,16 +29,16 @@ public class ComputerStockController {
 	
 	@PostMapping("/computer-stock")
 	ComputerStock newComputerStock(@RequestBody ComputerStock newComputerStock) {
-		Long idComputer = newComputerStock.getComputer().getId();
-		if (idComputer == null) new ComputerNotFoundException(idComputer);
+//		Long idComputer = newComputerStock.getComputer().getId();
+//		if (idComputer == null) new ComputerNotFoundException(idComputer);
 		
-		Computer computer = computerRepository.findById(idComputer)
-				.orElseThrow(() -> new ComputerStockNotFoundException(idComputer));
+//		Computer computer = computerRepository.findById(idComputer)
+//				.orElseThrow(() -> new ComputerStockNotFoundException(idComputer));
 		
 //		Computer computer = new Computer();
 //		computer.setId(idComputer);
 		
-		newComputerStock.setComputer(computer);
+//		newComputerStock.setComputer(computer);
 		
 		return computerStockRepository.save(newComputerStock);
 	}
@@ -56,18 +56,20 @@ public class ComputerStockController {
 	
 	@PutMapping("/computer-stock/{id}")
 	ComputerStock updateComputerStock(@RequestBody ComputerStock computerStock, @PathVariable Long id) {
-		
-		Long idComputer = computerStock.getComputer().getId();
-		if (idComputer == null) new ComputerNotFoundException(idComputer);
-
-		Computer computer = new ComputerController().getComputerById(idComputer);
-		
 		return computerStockRepository.findById(id)
 				.map(computerStockDb -> {
 					computerStockDb.setCode(computerStock.getCode());
 					computerStockDb.setLocation(computerStock.getLocation());
 					computerStockDb.setState(computerStock.getState());
-					computerStockDb.setComputer(computer);
+
+	                if (computerStock.getComputer() != null && computerStock.getComputer().getId() != null) {
+	                	Long idComputer =  computerStock.getComputer().getId();
+	                	
+	                    Computer computer = computerRepository.findById(idComputer)
+	                            .orElseThrow(() -> new ComputerStockNotFoundException(idComputer));
+	                	               	
+	                    computerStockDb.setComputer(computer);
+	                }
 
 					return computerStockRepository.save(computerStockDb);
 				}).orElseThrow(() -> new ComputerStockNotFoundException(id));
