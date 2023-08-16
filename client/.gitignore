@@ -25,6 +25,3 @@ dist-ssr
 
 # Environment Variables
 .env
-
-# Temporal solutions: https://github.com/handsontable/handsontable/discussions/10415
-declare module "*";
