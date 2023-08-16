@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.adso.crudapp.exception.ComputerStockNotFoundException;
 import com.adso.crudapp.exception.StudentNotFoundException;
-import com.adso.crudapp.model.Computer;
 import com.adso.crudapp.model.ComputerStock;
 import com.adso.crudapp.model.Student;
 import com.adso.crudapp.repository.ComputerStockRepository;
@@ -52,9 +51,6 @@ public class StudentController {
 					studentDB.setCardIdNumber(student.getCardIdNumber());
 					studentDB.setSession(student.getSession());
 					
-					// This is where I need help
-//					studentDB.setComputerStock(new ComputerStock());
-					
 	                if (student.getComputerStock() != null && student.getComputerStock().getId() != null) {
 	                	Long idComputerStock =  student.getComputerStock().getId();
 	                	
@@ -65,8 +61,6 @@ public class StudentController {
 	                } else {
 	                	studentDB.setComputerStock(null);
 	                }
-					
-					
 					
 					return studentRepository.save(studentDB);
 				}).orElseThrow(() -> new StudentNotFoundException(id));

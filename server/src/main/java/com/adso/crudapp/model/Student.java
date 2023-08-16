@@ -32,9 +32,6 @@ public class Student {
 	@Enumerated(EnumType.STRING)
 	private Session session;
 
-//    @OneToOne(mappedBy = "student", cascade = CascadeType.PERSIST)
-//    private ComputerAssignment computerAssignment;
-
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
     private ComputerStock computerStock;
 
@@ -69,15 +66,6 @@ public class Student {
 	public void setSession(Session session) {
 		this.session = session;
 	}
-
-//	public ComputerAssignment getComputerAssignment() {
-//		return computerAssignment;
-//	}
-//
-//	public void setComputerAssignment(ComputerAssignment computerAssignment) {
-//		this.computerAssignment = computerAssignment;
-//	}
-
 
 	public CardIdType getCardIdType() {
 		return cardIdType;

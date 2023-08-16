@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.adso.crudapp.exception.ComputerNotFoundException;
 import com.adso.crudapp.exception.ComputerStockNotFoundException;
 import com.adso.crudapp.model.Computer;
 import com.adso.crudapp.model.ComputerStock;
@@ -29,17 +28,6 @@ public class ComputerStockController {
 	
 	@PostMapping("/computer-stock")
 	ComputerStock newComputerStock(@RequestBody ComputerStock newComputerStock) {
-//		Long idComputer = newComputerStock.getComputer().getId();
-//		if (idComputer == null) new ComputerNotFoundException(idComputer);
-		
-//		Computer computer = computerRepository.findById(idComputer)
-//				.orElseThrow(() -> new ComputerStockNotFoundException(idComputer));
-		
-//		Computer computer = new Computer();
-//		computer.setId(idComputer);
-		
-//		newComputerStock.setComputer(computer);
-		
 		return computerStockRepository.save(newComputerStock);
 	}
 	

@@ -6,29 +6,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.adso.crudapp.controller.ComputerController;
 import com.adso.crudapp.enums.CardIdType;
 import com.adso.crudapp.enums.Session;
 import com.adso.crudapp.enums.State;
 import com.adso.crudapp.model.Computer;
 import com.adso.crudapp.model.ComputerStock;
 import com.adso.crudapp.model.Student;
-import com.adso.crudapp.repository.ComputerStockRepository;
 import com.adso.crudapp.repository.StudentRepository;
 
 @Component
 public class ComputerStockSeeder implements CommandLineRunner {
 	
 	@Autowired
-	private ComputerStockRepository computerStockRepository;
-	@Autowired
 	private StudentRepository studentRepository;
-//    private final StudentRepository studentRepository;
-
-//    @Autowired
-//    public ComputerStockSeeder(ComputerStockRepository entityRepository) {
-//        this.computerStockRepository = entityRepository;
-//    }
 
     @Override
     public void run(String... args) throws Exception {
@@ -41,7 +31,6 @@ public class ComputerStockSeeder implements CommandLineRunner {
     	
     	Computer entity1Comp = new Computer();
     	ComputerStock entity1CompStock = new ComputerStock();
-//    	ComputerAssignment entity1CompAss = new ComputerAssignment();
     	
     	entity1Comp.setName("MacBook Air M1");
     	entity1Comp.setBrand("Apple");
@@ -55,8 +44,6 @@ public class ComputerStockSeeder implements CommandLineRunner {
     	
     	entity1CompStock.setComputer(entity1Comp);
     	entity1.setComputerStock(entity1CompStock);
-//    	entity1CompAss.setComputerStock(entity1CompStock);
-//    	entity1.setComputerAssignment(entity1CompAss);
     	
     	Student entity2 = new Student();
     	entity2.setName("Emily");
@@ -66,7 +53,6 @@ public class ComputerStockSeeder implements CommandLineRunner {
 
     	Computer entity2Comp = new Computer();
     	ComputerStock entity2CompStock = new ComputerStock();
-//    	ComputerAssignment entity2CompAss = new ComputerAssignment();
 
     	entity2Comp.setName("Inspiron 15");
     	entity2Comp.setBrand("HP");
@@ -80,8 +66,6 @@ public class ComputerStockSeeder implements CommandLineRunner {
 
     	entity2CompStock.setComputer(entity2Comp);
     	entity2.setComputerStock(entity2CompStock);
-//    	entity2CompAss.setComputerStock(entity2CompStock);
-//    	entity2.setComputerAssignment(entity2CompAss);
     	
     	Student entity3 = new Student();
     	entity3.setName("Sophia");
@@ -91,7 +75,6 @@ public class ComputerStockSeeder implements CommandLineRunner {
 
     	Computer entity3Comp = new Computer();
     	ComputerStock entity3CompStock = new ComputerStock();
-//    	ComputerAssignment entity3CompAss = new ComputerAssignment();
 
     	entity3Comp.setName("Aspire 5");
     	entity3Comp.setBrand("Acer");
@@ -104,10 +87,7 @@ public class ComputerStockSeeder implements CommandLineRunner {
     	entity3CompStock.setState(State.WORKING);
 
     	entity3CompStock.setComputer(entity3Comp);
-    	entity3.setComputerStock(entity3CompStock);
-//    	entity3CompAss.setComputerStock(entity3CompStock);
-//    	entity3.setComputerAssignment(entity3CompAss);
-    	
+    	entity3.setComputerStock(entity3CompStock);    	
 
     	Student entity4 = new Student();
     	entity4.setName("Oliver");
@@ -117,7 +97,6 @@ public class ComputerStockSeeder implements CommandLineRunner {
 
     	Computer entity4Comp = new Computer();
     	ComputerStock entity4CompStock = new ComputerStock();
-//    	ComputerAssignment entity4CompAss = new ComputerAssignment();
 
     	entity4Comp.setName("ThinkPad X1 Carbon");
     	entity4Comp.setBrand("Lenovo");
@@ -130,10 +109,7 @@ public class ComputerStockSeeder implements CommandLineRunner {
     	entity4CompStock.setState(State.MAINTENANCE);
 
     	entity4CompStock.setComputer(entity4Comp);
-    	entity4.setComputerStock(entity4CompStock);
-//    	entity4CompAss.setComputerStock(entity4CompStock);
-//    	entity4.setComputerAssignment(entity4CompAss);
-    	
+    	entity4.setComputerStock(entity4CompStock);   	
     	
         studentRepository.saveAll(
         		List.of(entity1, entity2, entity3, entity4)
