@@ -38,7 +38,7 @@ public class StudentSeeder implements CommandLineRunner {
 //        studentRepository.save(entity2);
         
         Student entity3 = new Student();
-        entity3.setName("Sophia");
+        entity3.setName("Samuel");
         entity3.setCardIdType(CardIdType.TI);
         entity3.setCardIdNumber("543210987");
         entity3.setSession(Session.AFTERNOON);
