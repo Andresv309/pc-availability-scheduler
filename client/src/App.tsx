@@ -1,19 +1,16 @@
-import './App.css'
-import { Section } from './components/Section'
+import { ReactNode } from 'react'
 
+import { NavBar } from './components/NavBar'
 
-function App() {
-
+function App({ children } : { children: ReactNode}) {
   return (
-    <div className='flex justify-center w-screen h-screen bg-slate-900'>
-      <div className='flex flex-col gap-4 max-w-7xl w-full p-8 bg-slate-700 m-8 rounded'>
-        <h1 className='text-2xl'>
-          <strong>Java Crud Application</strong>
-        </h1>
-        <div className='w-full h-full bg-slate-900 p-4 rounded'>
-          <Section />
+    <div className='flex flex-col items-center w-screen h-screen'>
+      <NavBar />
+      <main className='flex flex-col gap-4 max-w-7xl w-full p-4 h-full rounded'>
+        <div className='w-full h-full'>
+          {children}
         </div>
-      </div>
+      </main>
     </div>
   )
 }
